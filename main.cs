@@ -19,7 +19,7 @@ class Program {
     public static void Main (string[] args) {
         var lista = new List<Dolgozo>();              // üres lista létrehozása
         
-        var f =  new StreamReader("berek2020.txt", Encoding.Default); // a "berek2020.txt" fájl megnyitása f néven 
+        var f =  new StreamReader("berek2020.txt", Encoding.UTF8); // a "berek2020.txt" fájl megnyitása f néven 
         var elsosor = f.ReadLine();                   // az elsosorba kerül a fájl első sora.
         
         while (!f.EndOfStream){              // amig a fájl végére nem érünk addig imétlünk
@@ -46,10 +46,10 @@ class Program {
         var reszlegneve = Console.ReadLine();
 
 // 6. feladat: A legtöbbet kereső dolgozó a megadott részlegen
-        var res = (from sor in lista where (sor.reszleg == reszlegneve) select (sor.ber, sor));	
+        var res = (from sor in lista where (sor.reszleg == reszlegneve) select (sor.ber, sor));	// a from végigpörgeti a lista-t, 
+        // az egyes sorok a sor- ba kerülnek a where kiválaszja a feltételben megfelelőket, ezeket a  select "kitolja" mint (sor.ber, sor) a res-be 
         if (res.Count()>0){
-            var maxi = res.Max().Item2;
-            Console.WriteLine(maxi.nev);
+            var maxi = res.Max().Item2; // A Max() kiválastja a res-ben levő sorok első adata alapján (bér) a legnagyobbat, a második adat (sor) kerül a maxi-ba
             Console.WriteLine($"6. feladat: A legtöbbet kereső dolgozó a megadott részlegen");
             Console.WriteLine($"        Név: {maxi.nev}");
             Console.WriteLine($"        Neme: {maxi.neme}");
@@ -61,18 +61,18 @@ class Program {
         }
         
          //7. feladat: Statisztika
-        var statisztika = new Dictionary<string, int>();
-        foreach (var sor in lista) {
-            if (statisztika.ContainsKey(sor.reszleg)) {
-                statisztika[sor.reszleg]++;
+        var statisztika = new Dictionary<string, int>(); // Üres szótár létrehozása statisztika néven
+        foreach (var sor in lista) {                     // a foreach végiggyalogol a lista-n, a lista sorai a sor-ba kerulnek
+            if (statisztika.ContainsKey(sor.reszleg)) {  // ha a sor-ban levő részleg mező mint kulcs benne van a statisztika szótárban
+                statisztika[sor.reszleg]++;              // akkor a kulcshoz tartozó értéket megnöveli eggyel
             } 
-            else {
-            statisztika[sor.reszleg] = 1;
-            }
+            else {                                       // egyébként
+            statisztika[sor.reszleg] = 1;                // a statisztika szótárban létrehozza a sor.reszleg változó alapján az új kulcsot, 
+            }                                            // amihez az 1 egész számot rendeli értkként.
         }
         Console.WriteLine($"7. feladat: Statisztika");
-        foreach(KeyValuePair<string , int>  item in statisztika){
-            Console.WriteLine($"        {item.Key} - {item.Value} ");
+        foreach(var kulcs_ertek in statisztika){         // a foreach végiggyalogol a statisztika-n, a kulcs - érték párok a kulcs_ertek- be kerülnek
+            Console.WriteLine($"        {kulcs_ertek.Key} - {kulcs_ertek.Value} ");
         }
         
         
