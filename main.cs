@@ -74,7 +74,6 @@ class Program {
         foreach(var kulcs_ertek in statisztika){         // a foreach végiggyalogol a statisztika-n, a kulcs - érték párok a kulcs_ertek- be kerülnek
             Console.WriteLine($"        {kulcs_ertek.Key} - {kulcs_ertek.Value} ");
         }
-        
-        
+       
     }  
 }
