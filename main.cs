@@ -7,7 +7,7 @@ using System.Text;                // Encoding
 using System.Collections.Generic; // List<>, Dictionary<>
 using System.Linq;                // from where select
 
-class Dolgozo{
+class Dolgozo{                    // "Minimalista" osztály definíció
 	public string nev;
 	public string neme;
 	public string reszleg;
@@ -17,22 +17,22 @@ class Dolgozo{
 
 class Program {
     public static void Main (string[] args) {
-        var lista = new List<Dolgozo>();
+        var lista = new List<Dolgozo>();              // üres lista létrehozása
         
-        var f =  new StreamReader("berek2020.txt", Encoding.Default);
-        var elsosor = f.ReadLine();
+        var f =  new StreamReader("berek2020.txt", Encoding.Default); // a "berek2020.txt" fájl megnyitása f néven 
+        var elsosor = f.ReadLine();                   // az elsosorba kerül a fájl első sora.
         
-        while (!f.EndOfStream){
-		  var dolgozo = new Dolgozo();
-		  string [] s = f.ReadLine().Split(';');
-		  dolgozo.nev = s[0];
-		  dolgozo.neme = s[1];
-		  dolgozo.reszleg = s[2];
-		  dolgozo.belepes = s[3];
-		  dolgozo.ber = int.Parse(s[4]);
-		  lista.Add(dolgozo);
+        while (!f.EndOfStream){              // amig a fájl végére nem érünk addig imétlünk
+		  var dolgozo = new Dolgozo();              // létrehozunk egy dolgozo-t a Dolgozó osztály alapján
+		  var s = f.ReadLine().Split(';');          // az s változóba kerül a beolvasott és a pontosvessző mentén feldarabolt sor       
+		  dolgozo.nev = s[0];                       // a dolgozo.nev-be      kerül az s lista nulladik eleme
+		  dolgozo.neme = s[1];                      // a dolgozo.neme-be     kerül az s lista nulladik eleme
+		  dolgozo.reszleg = s[2];                   // a dolgozo.reszleg-be  kerül az s lista nulladik eleme
+		  dolgozo.belepes = s[3];                   // a dolgozo.belepes-be  kerül az s lista nulladik eleme
+		  dolgozo.ber = int.Parse(s[4]);            // a dolgozo.nev -be     kerül az s lista nulladik eleme egész számmá alaítva
+		  lista.Add(dolgozo);                       // a lista-hoz adjuk a dolgozo példányt.
 		}
-        f.Close();
+        f.Close();                           // bezárjuk az f fájlt
 
         // 3. feladat: Dolgozók száma: ? 
         Console.WriteLine($"3. feladat: Dolgozók száma: {lista.Count} fő");
