@@ -7,7 +7,7 @@ using System.Text;                // Encoding
 using System.Collections.Generic; // List<>, Dictionary<>
 using System.Linq;                // from where select
 
-class Dolgozo{
+class Dolgozo{ 
 	public string nev       {get; set;}
 	public string neme      {get; set;}
 	public string reszleg   {get; set;}
