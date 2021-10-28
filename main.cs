@@ -41,7 +41,10 @@ class Program {
         Console.WriteLine($"3. feladat: Dolgozók száma: {lista.Count} fő");
 
         // 4. feladat: Bérek átlaga: ####,# eFt
-        var atlag = (from  sor in lista select sor.ber).Average() / 1000;
+        var atlag = (
+            from  sor in lista 
+            select sor.ber
+            ).Average() / 1000;
         Console.WriteLine($"4. feladat: Bérek átlaga: {atlag:0.#} eFt");
 
         // 5. feladat: Kérem egy részleg nevét:
@@ -49,8 +52,13 @@ class Program {
         var reszlegneve = Console.ReadLine();
 
 // 6. feladat: A legtöbbet kereső dolgozó a megadott részlegen
-        var res = (from sor in lista where (sor.reszleg == reszlegneve) orderby sor.ber select sor);	
-        if (res.Count()>0){
+        var res = (
+            from sor in lista 
+            where (sor.reszleg == reszlegneve) 
+            orderby sor.ber 
+            select sor
+            );	
+        if (res.Any()){
             var maxi = res.Last();
             Console.WriteLine($"6. feladat: A legtöbbet kereső dolgozó a megadott részlegen");
             Console.WriteLine($"        Név: {maxi.nev}");
@@ -64,7 +72,10 @@ class Program {
         
         //7. feladat: Statisztika
         Console.WriteLine($"7. feladat: Statisztika"); 
-        var statisztika = (from sor in lista group sor by sor.reszleg);
+        var statisztika = (
+            from sor in lista 
+            group sor by sor.reszleg
+            );
         foreach( var q in statisztika ){
             Console.WriteLine($"        {q.Key}: {q.Count()} ");
         }
